@@ -67,4 +67,4 @@ async def on_message(message):
   
      
 
-client.run(TOKEN_BOT)
+client.run(ODQ2Mzg4MDQxNTYzMzczNTcy.YKuySg.C1OYaZAbnCrdeejMsSD1r-3RKTE)

@@ -4,13 +4,17 @@ import json
 import random
 from replit import db
 import requests
-from THWmotions.py import THW
+from THWmotions import THW
+from getMotions import disp, disp_InfoMotions, getMotion
+import pandas as pd
+from keep_alive import keep_alive
 
+my_secret = os.environ['TOKEN']
 
 
 client = ds.Client()
 
-command_list = ["$Hello - gesture", "$Bye - gesture", "$MatchupAP - creates a matchup based on team1 and team2", "$Coinflip - essential tool for deciding motions!", "$MatchupBP - creates a matchup for a BP based on team numbers (i.e. 1,2,3,4)"]
+command_list = ["$Hello - gesture", "$Bye - gesture", "$MatchupAP - creates a matchup based on team1 and team2", "$coinflip - essential tool for deciding motions!", "$MatchupBP - creates a matchup for a BP based on team numbers (i.e. 1,2,3,4)", "$getTHO - gets a THO motion","$getTHP - gets a THP motion", "$getTHW - gets a THW motion", "$getTHR - gets a THR motion", "$getTHBT - gets a THBT motion", "$getTHS - gets a THS motion", "$getActor - gets an actor motion", ]
 
 thw_motions = ["THW introduce Mandatory Organ Donation", "THW abolish trial by jury", "THW remove all non-military sanctions on Iran"] + THW
 
@@ -62,9 +66,55 @@ async def on_message(message):
     await message.channel.send(final)
 
   if message.content.startswith("$getTHW"):
-    await message.channel.send("Your motion: " + random.choice(thw_motions))
+    motion, infoslide = getMotion('THW')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
 
-  
-     
+  if message.content.startswith("$getTHO"):
+    motion, infoslide = getMotion('THO')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
 
-client.run(ODQ2Mzg4MDQxNTYzMzczNTcy.YKuySg.C1OYaZAbnCrdeejMsSD1r-3RKTE)
+  if message.content.startswith("$getTHR"):
+    motion, infoslide = getMotion('THR')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
+
+  if message.content.startswith("$getTHS"):
+    motion, infoslide = getMotion('THS')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
+
+  if message.content.startswith("$getTHBT"):
+    motion, infoslide = getMotion('THBT')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
+
+
+  if message.content.startswith("$getActor"):
+    motion, infoslide = getMotion('Actor')
+    await message.channel.send("Your motion: " + motion)
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
+
+  if message.content.startswith("$getTHP"):
+    motion, infoslide = getMotion('THP')
+    await message.channel.send("Your motion: " + motion )
+    if pd.isnull(infoslide) == False:
+      await message.channel.send("\n Infoslide: " + infoslide)
+
+keep_alive()
+
+client.run(my_secret)
+
+#"""
+
+#disp()
+#motion, infoslide = getMotion('THW')
+#print(motion , '\n', infoslide)
+#disp_InfoMotions()
